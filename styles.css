@@ -7,20 +7,20 @@ body {
   display: none;
 }
 
-.book{
+.book-card{
   background-color: red;
   border: 2px solid black;
 }
 
-#books-container{
+#books-section{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
   gap: 12px;
 }
 
-.book {padding: 0 10px;}
+.book-card {padding: 0 10px;}
 
-.book > button {
+.book-card > button {
   width: 100%
 }
 

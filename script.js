@@ -1,5 +1,23 @@
 const library = [];
 
+
+document.addEventListener("DOMContentLoaded", () => { 
+
+const addBookButton = document.getElementById("add-book-button");
+const booksSection = document.getElementById("books-section");
+const formModal = document.getElementById("form-modal");
+const addBookForm = document.getElementById("add-book-form");
+const cancelButton = document.getElementById("cancel-button");
+
+addBookForm.addEventListener("submit", (e) =>
+  bookSubmitHandler(e, addBookForm, booksSection)
+);
+
+addBookButton.addEventListener("click", () => toggleClass(formModal, "hidden"));
+
+cancelButton.addEventListener("click", () => toggleClass(formModal, "hidden"));
+})
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -7,20 +25,24 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-const addBookForm = document.getElementById("add-book-form");
-addBookForm.addEventListener("submit", (e) =>
-  newBookSumbitHandler(e, addBookForm)
-);
-
-function newBookSumbitHandler(e, form) {
+function bookSubmitHandler(e, form, section) {
   e.preventDefault();
   addBookToLibrary();
-  showBookCard(library[library.length - 1], booksSection);
+  showBookCard(library[library.length - 1], section);
   form.reset();
 }
 
+function createBook(title, author, pages, read) {
+  const newBook = Object.create(Book.prototype);
+  newBook.title = title;
+  newBook.author = author;
+  newBook.pages = pages;
+  newBook.read = read;
+  return newBook;
+}
+
 function addBookToLibrary() {
-  const newBook = new Book(
+  const newBook = createBook(
     document.getElementById("title").value,
     document.getElementById("author").value,
     document.getElementById("pages").value,
@@ -29,51 +51,48 @@ function addBookToLibrary() {
   library.push(newBook);
 }
 
-const addBookButton = document.getElementById("add-book-button");
-addBookButton.addEventListener("click", () =>
-  toggleVisibility(formModal, "hidden")
-);
-const formModal = document.getElementById("form-modal");
-
-const cancelButton = document.getElementById("cancel-button")
-cancelButton.addEventListener("click", () => toggleVisibility(formModal, "hidden"))
-
-function toggleVisibility(element, className) {
-  element.classList.toggle(className);
-}
-
-const booksSection = document.getElementById("books-container");
-
 function showBookCard(obj, section) {
   const book = generateBookCard(obj);
   section.appendChild(book);
 }
 
+function toggleClass(element, className) {
+  element.classList.toggle(className);
+}
+
 function generateBookCard(obj) {
-  let book = document.createElement("div");
-  book.classList.add("book");
+  const bookCard = document.createElement("div");
+  bookCard.classList.add("book-card");
   const title = createBookCardElement("h1", obj.title);
   const author = createBookCardElement("h3", `By ${obj.author}`);
   const pages = createBookCardElement("p", `${obj.pages} pages`);
   const deleteButton = createBookCardElement("button", "Remove");
-  const readButton = createBookCardElement("button", "read");
+  const readButton = createBookCardElement("button", "Read");
 
-  if (!obj.read){
-    toggleVisibility(readButton, "not-read")
+  deleteButton.addEventListener("click", () => deleteBookCard(bookCard, obj));
+
+  if (!obj.read) {
+    toggleClass(readButton, "not-read");
   }
 
   readButton.addEventListener("click", () => {
-    toggleVisibility(readButton, "not-read");
+    toggleClass(readButton, "not-read");
     obj.read = !obj.read;
   });
 
-  deleteButton.addEventListener("click", () => deleteBookCard(book, obj));
-  book.appendChild(title);
-  book.appendChild(author);
-  book.appendChild(pages);
-  book.appendChild(readButton);
-  book.appendChild(deleteButton);
-  return book;
+  const elements = [title, author, pages, readButton, deleteButton];
+
+  elements.forEach((element) => {
+    bookCard.appendChild(element);
+  });
+
+  return bookCard;
+}
+
+function createBookCardElement(tag, content) {
+  const element = document.createElement(tag);
+  element.textContent = content;
+  return element;
 }
 
 function deleteBookCard(bookCard, book) {
@@ -83,27 +102,3 @@ function deleteBookCard(bookCard, book) {
     library.splice(i, 1);
   }
 }
-
-function createBookCardElement(tag, content) {
-  const element = document.createElement(tag);
-  element.textContent = content;
-  return element;
-}
-
-//TEST
-function testFunction() {
-  const book1 = new Book("Lord of the Rings", "J. R. R. Tolkien", 389, true);
-  library.push(book1);
-  showBookCard(library[library.length - 1], booksSection);
-  const book2 = new Book("Game of Thrones", "George R. R. Martin", 495, true);
-  library.push(book2);
-  showBookCard(library[library.length - 1], booksSection);
-  const book3 = new Book("Misery", "Stephen King", 484, false);
-  library.push(book3);
-  showBookCard(library[library.length - 1], booksSection);
-  const book4 = new Book("The Hunger Games", "Suzanne Collins", 312, false);
-  library.push(book4);
-  showBookCard(library[library.length - 1], booksSection);
-}
-
-// testFunction();
