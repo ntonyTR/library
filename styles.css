@@ -1,0 +1,34 @@
+body {
+  background-color: darkcyan;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.book{
+  background-color: red;
+  border: 2px solid black;
+}
+
+#books-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+  gap: 12px;
+}
+
+.book {padding: 0 10px;}
+
+.book > button {
+  width: 100%
+}
+
+.not-read::before{
+  content: "not ";
+}
+
+.not-read{
+  background-color: red;
+  color: white;
+}
