@@ -35,6 +35,9 @@ addBookButton.addEventListener("click", () =>
 );
 const formModal = document.getElementById("form-modal");
 
+const cancelButton = document.getElementById("cancel-button")
+cancelButton.addEventListener("click", () => toggleVisibility(formModal, "hidden"))
+
 function toggleVisibility(element, className) {
   element.classList.toggle(className);
 }
@@ -55,11 +58,15 @@ function generateBookCard(obj) {
   const deleteButton = createBookCardElement("button", "Remove");
   const readButton = createBookCardElement("button", "read");
 
+  if (!obj.read){
+    toggleVisibility(readButton, "not-read")
+  }
+
   readButton.addEventListener("click", () => {
     toggleVisibility(readButton, "not-read");
     obj.read = !obj.read;
   });
-  
+
   deleteButton.addEventListener("click", () => deleteBookCard(book, obj));
   book.appendChild(title);
   book.appendChild(author);
@@ -97,12 +104,6 @@ function testFunction() {
   const book4 = new Book("The Hunger Games", "Suzanne Collins", 312, false);
   library.push(book4);
   showBookCard(library[library.length - 1], booksSection);
-
-  // SOLO FUNCIONA DESPUES DE Q EL DOM CARGA
-  // readButtons = Array.from(document.getElementsByClassName("read-button"))
-  // readButtons.forEach(button => {
-  //   button.addEventListener("click", toggleVisibility(button, "not-read"))
-  // });
 }
 
-testFunction();
+// testFunction();

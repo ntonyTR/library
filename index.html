@@ -31,22 +31,22 @@
         <legend>Add book</legend>
         <div class="form-element">
           <label for="title">Title:</label>
-          <input type="text" id="title" name="title" placeholder="Game of Thrones" >
+          <input type="text" id="title" name="title" placeholder="Game of Thrones" required>
         </div>
         <div class="form-element">
           <label for="author">Author:</label>
-          <input type="text" id="author" name="author" placeholder="George R. R. Martin" >
+          <input type="text" id="author" name="author" placeholder="George R. R. Martin" required>
         </div>
         <div class="form-element">
           <label for="pages">Number of pages:</label>
-          <input type="number" id="pages" name="pages" placeholder="694" >
+          <input type="number" id="pages" name="pages" placeholder="694" required>
         </div>
         <div class="form-element">
           <label for="read">Read</label>
           <input type="checkbox" id="read" name="read" value="read">
         </div>
         <button type="submit" form="add-book-form">Add</button>
-        <button id="cancel-button">Cancel</button>
+        <button id="cancel-button" type="button">Cancel</button>
       </fieldset>
     </form>
   </div>
