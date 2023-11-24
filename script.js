@@ -6,15 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const formModal = document.getElementById("form-modal");
   const addBookForm = document.getElementById("add-book-form");
   const cancelButton = document.getElementById("cancel-button");
-
+  // toggleClass(formModal, ["hidden", "modal"])//TEST
   addBookForm.addEventListener("submit", (e) =>
     bookSubmitHandler(e, addBookForm, booksSection)
   );
   addBookButton.addEventListener("click", () =>
-    toggleClass(formModal, "hidden")
+    toggleClass(formModal, ["hidden", "modal"])
   );
   cancelButton.addEventListener("click", () =>
-    toggleClass(formModal, "hidden")
+    toggleClass(formModal, ["hidden", "modal"])
   );
 
   addDefaultBooks(booksSection);
@@ -78,8 +78,12 @@ function showBookCard(obj, section) {
   section.insertBefore(book, firstChild);
 }
 
-function toggleClass(element, className) {
-  element.classList.toggle(className);
+function toggleClass(element, classNames =[]) {
+  // element.classList.toggle(className);
+  classNames.forEach(className => {
+    element.classList.toggle(className)
+  });
+
 }
 
 function generateBookCard(obj) {
@@ -99,18 +103,18 @@ function generateBookCard(obj) {
 
   ]);
   const readButton = createBookCardElement("button", "READ", [
-
+    "read",
   ]);
 
   deleteButton.addEventListener("click", () => deleteBookCard(bookCard, obj));
   
   readButton.addEventListener("click", () => {
-    toggleClass(readButton, "not-read");
+    toggleClass(readButton, ["not-read"]);
     obj.read = !obj.read;
   });
   
   if (!obj.read) {
-    toggleClass(readButton, "not-read");
+    toggleClass(readButton, ["not-read"]);
   }
 
   const elements = [title, author, pages, readButton, deleteButton];
@@ -129,9 +133,12 @@ function createBookCardElement(tag, content, classes = []) {
 }
 
 function deleteBookCard(bookCard, book) {
-  bookCard.remove();
-  const i = library.indexOf(book);
-  if (i !== -1) {
-    library.splice(i, 1);
+  let askUser = window.confirm("Remove book?");
+  if(askUser){
+    bookCard.remove();
+    const i = library.indexOf(book);
+    if (i !== -1) {
+      library.splice(i, 1);
+    }
   }
 }

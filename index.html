@@ -15,10 +15,7 @@
   </header>
 
   <main>
-    <div class="button-container">
       <button type="button" id="add-book-button">Add book</button>
-    </div>
-
     <section id="books-section"></section>
   </main>
 
@@ -27,6 +24,7 @@
   </footer>
 
   <div class="hidden" id="form-modal">
+    <button id="cancel-button" type="button"></button>
     <form action="#" method="post" id="add-book-form">
       <fieldset>
         <legend>Add book</legend>
@@ -53,7 +51,6 @@
 
         <button type="submit" form="add-book-form">Add</button>
 
-        <button id="cancel-button" type="button">Cancel</button>
       </fieldset>
     </form>
   </div>

@@ -5,12 +5,25 @@ body {
 }
 
 #books-section{
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 25ch);
+  grid-template-columns: repeat(auto-fit, 30ch);
   gap: 1rem;
   justify-content: center;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+main button:first-child {
+  margin-bottom: 1rem;
+  width: 12rem;
+  font-size: 1.5rem;
+}
 
 .hidden {
   display: none;
@@ -18,4 +31,53 @@ body {
 
 .not-read::before{
   content: "NOT ";
+}
+
+.read{
+  background-color: green;
+}
+
+.not-read {
+  background-color: yellow;
+}
+
+.book-card {
+  border: 2px solid black;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  height: max-content;
+  background-color: red;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#cancel-button{
+  align-self: end;
+  background-color: transparent;
+  border: none;
+  font-weight: bolder;
+}
+
+#cancel-button::before{
+  content: "X";
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
