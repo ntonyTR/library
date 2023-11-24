@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formModal = document.getElementById("form-modal");
   const addBookForm = document.getElementById("add-book-form");
   const cancelButton = document.getElementById("cancel-button");
-  // toggleClass(formModal, ["hidden", "modal"])//TEST
+  toggleClass(formModal, ["hidden", "modal"])//TEST
   addBookForm.addEventListener("submit", (e) =>
     bookSubmitHandler(e, addBookForm, booksSection)
   );

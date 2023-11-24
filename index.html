@@ -11,11 +11,11 @@
 
 <body>
   <header>
-    <h1>Library</h1>
+    <h1>LIBRARY</h1>
   </header>
 
   <main>
-      <button type="button" id="add-book-button">Add book</button>
+      <button type="button" id="add-book-button">New book</button>
     <section id="books-section"></section>
   </main>
 
@@ -24,10 +24,12 @@
   </footer>
 
   <div class="hidden" id="form-modal">
-    <button id="cancel-button" type="button"></button>
     <form action="#" method="post" id="add-book-form">
       <fieldset>
-        <legend>Add book</legend>
+        <div class="modal-header">
+          <legend>New book</legend>
+          <button id="cancel-button" type="button"></button>
+        </div>
 
         <div class="form-element">
           <label for="title">Title:</label>
@@ -44,9 +46,9 @@
           <input type="number" id="pages" name="pages" placeholder="694" required min="1">
         </div>
 
-        <div class="form-element">
-          <label for="read">Read</label>
+        <div class="form-element" id="read-check">
           <input type="checkbox" id="read" name="read" value="read">
+          <label for="read">Read</label>
         </div>
 
         <button type="submit" form="add-book-form">Add</button>

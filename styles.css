@@ -1,7 +1,33 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Jura&display=swap');
+
+:root {
+  --white: #fdf7fa;
+  --grey: #dedede;
+  --black: #071013;
+  --red: #ea2b1f;
+  --blue: #3943b7;
+}
+
+html {
+  height: 100%;
+}
+
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+body {
+  min-height: 100%;
+  font-family: 'Comfortaa', sans-serif;
+  background-color: var(--white);
+  color: var(--black);
+}
+
+h1{
+  font-family: 'Jura', sans-serif;
 }
 
 #books-section{
@@ -47,31 +73,84 @@ main button:first-child {
   padding: 1rem;
 }
 
+/* MODAL */
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: max-content;
-  height: max-content;
-  background-color: red;
-  justify-content: center;
-  align-items: center;
+  padding: 0.5rem 1rem 1rem 1rem;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid var(--black);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, .9);
+}
+
+fieldset {
   display: flex;
   flex-direction: column;
+  border: none;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+legend {
+  font-family: 'Jura', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 #cancel-button{
-  align-self: end;
+  color:var(--red);
   background-color: transparent;
   border: none;
-  font-weight: bolder;
 }
 
 #cancel-button::before{
-  content: "X";
+  content: "\00d7";
+  font-size: 1.5rem;
+  font-family: 'Comfortaa', sans-serif;
 }
 
+.form-element{
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  margin-bottom: 1rem;
+}
+
+.form-element input {
+  height: 2rem;
+  font-size: 1rem;
+  padding: 1ch;
+  border: none;
+  background-color: var(--grey);
+  border-radius: 5px;
+}
+
+#read-check{
+  flex-direction: row;
+  align-items: center;
+  margin-top: -1rem;
+  align-self: center;
+}
+
+button[type="submit"]{
+  background-color: var(--blue);
+  padding: 0.5rem 0;
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bolder;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, .5);
+}
+
+/*  */
 button {
   cursor: pointer;
 }
