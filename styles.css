@@ -1,34 +1,21 @@
 body {
-  background-color: darkcyan;
-  color: white;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
+
+#books-section{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 25ch);
+  gap: 1rem;
+  justify-content: center;
+}
+
 
 .hidden {
   display: none;
 }
 
-.book-card{
-  background-color: red;
-  border: 2px solid black;
-}
-
-#books-section{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
-  gap: 12px;
-}
-
-.book-card {padding: 0 10px;}
-
-.book-card > button {
-  width: 100%
-}
-
 .not-read::before{
-  content: "not ";
-}
-
-.not-read{
-  background-color: red;
-  color: white;
+  content: "NOT ";
 }

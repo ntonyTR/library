@@ -1,22 +1,43 @@
 const library = [];
 
+document.addEventListener("DOMContentLoaded", () => {
+  const addBookButton = document.getElementById("add-book-button");
+  const booksSection = document.getElementById("books-section");
+  const formModal = document.getElementById("form-modal");
+  const addBookForm = document.getElementById("add-book-form");
+  const cancelButton = document.getElementById("cancel-button");
 
-document.addEventListener("DOMContentLoaded", () => { 
+  addBookForm.addEventListener("submit", (e) =>
+    bookSubmitHandler(e, addBookForm, booksSection)
+  );
+  addBookButton.addEventListener("click", () =>
+    toggleClass(formModal, "hidden")
+  );
+  cancelButton.addEventListener("click", () =>
+    toggleClass(formModal, "hidden")
+  );
 
-const addBookButton = document.getElementById("add-book-button");
-const booksSection = document.getElementById("books-section");
-const formModal = document.getElementById("form-modal");
-const addBookForm = document.getElementById("add-book-form");
-const cancelButton = document.getElementById("cancel-button");
+  addDefaultBooks(booksSection);
+});
 
-addBookForm.addEventListener("submit", (e) =>
-  bookSubmitHandler(e, addBookForm, booksSection)
-);
+function addDefaultBooks(section) {
+  const defaultBooks = [
+    new Book("Game of Thrones", "George R.R. Martin", 694, true),
+    new Book("The Lord of the Rings", "J.R.R. Tolkien", 1216, false),
+    new Book("It", "Stephen King", 1168, true),
+    new Book("1984", "George Orwell", 336, true),
+    new Book("Cien años de soledad", "Gabriel García Márquez ", 464, false),
+    new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 223, true),
+    new Book("To Kill a Mockingbird", "Harper Lee", 336, true),
+    new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false),
+    new Book("The Catcher in the Rye", "J.D. Salinger", 224, true),
+  ];
 
-addBookButton.addEventListener("click", () => toggleClass(formModal, "hidden"));
-
-cancelButton.addEventListener("click", () => toggleClass(formModal, "hidden"));
-})
+  defaultBooks.forEach((book) => {
+    library.push(book);
+    showBookCard(book, section);
+  });
+}
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -53,7 +74,8 @@ function addBookToLibrary() {
 
 function showBookCard(obj, section) {
   const book = generateBookCard(obj);
-  section.appendChild(book);
+  const firstChild = section.firstChild;
+  section.insertBefore(book, firstChild);
 }
 
 function toggleClass(element, className) {
@@ -61,27 +83,37 @@ function toggleClass(element, className) {
 }
 
 function generateBookCard(obj) {
-  const bookCard = document.createElement("div");
-  bookCard.classList.add("book-card");
-  const title = createBookCardElement("h1", obj.title);
-  const author = createBookCardElement("h3", `By ${obj.author}`);
-  const pages = createBookCardElement("p", `${obj.pages} pages`);
-  const deleteButton = createBookCardElement("button", "Remove");
-  const readButton = createBookCardElement("button", "Read");
+  const bookCard = createBookCardElement("div", "", [
+    "book-card",
+  ]);
+  const title = createBookCardElement("h3", obj.title, [
+
+  ]);
+  const author = createBookCardElement("h6", `By ${obj.author}`, [
+
+  ]);
+  const pages = createBookCardElement("p", `${obj.pages} pages`, [
+
+  ]);
+  const deleteButton = createBookCardElement("button", "REMOVE", [
+
+  ]);
+  const readButton = createBookCardElement("button", "READ", [
+
+  ]);
 
   deleteButton.addEventListener("click", () => deleteBookCard(bookCard, obj));
-
-  if (!obj.read) {
-    toggleClass(readButton, "not-read");
-  }
-
+  
   readButton.addEventListener("click", () => {
     toggleClass(readButton, "not-read");
     obj.read = !obj.read;
   });
+  
+  if (!obj.read) {
+    toggleClass(readButton, "not-read");
+  }
 
   const elements = [title, author, pages, readButton, deleteButton];
-
   elements.forEach((element) => {
     bookCard.appendChild(element);
   });
@@ -89,9 +121,10 @@ function generateBookCard(obj) {
   return bookCard;
 }
 
-function createBookCardElement(tag, content) {
+function createBookCardElement(tag, content, classes = []) {
   const element = document.createElement(tag);
   element.textContent = content;
+  classes.forEach((className) => element.classList.add(className));
   return element;
 }
 
