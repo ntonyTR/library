@@ -2,13 +2,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Jura&display=swap');
 
 :root {
-  --white: #fdf7fa;
+  --white: #ffffff;
   --grey: #dedede;
   --black: #071013;
   --red: #ea2b1f;
   --blue: #3943b7;
+  --dark-grey: #5a5a5a;
+  --green: #52b963;
+  --orange: #ffee00;
 }
 
+/* GENERAL */
 html {
   height: 100%;
 }
@@ -22,55 +26,114 @@ html {
 body {
   min-height: 100%;
   font-family: 'Comfortaa', sans-serif;
-  background-color: var(--white);
+  background-color: var(--grey);
   color: var(--black);
 }
 
-h1{
+header{
+  text-align: center;
   font-family: 'Jura', sans-serif;
-}
-
-#books-section{
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 30ch);
-  gap: 1rem;
-  justify-content: center;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-}
-
-main button:first-child {
-  margin-bottom: 1rem;
-  width: 12rem;
   font-size: 1.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1ch;
 }
 
 .hidden {
   display: none;
 }
 
-.not-read::before{
-  content: "NOT ";
+button {
+  cursor: pointer;
 }
 
-.read{
-  background-color: green;
+/* MAIN */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.not-read {
-  background-color: yellow;
+main > button:first-child {
+  margin-bottom: 1rem;
+  width: 15rem;
+}
+
+#books-section{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 24ch);
+  gap: 1rem;
+  justify-content: center;
 }
 
 .book-card {
-  border: 2px solid black;
-  border-radius: 1rem;
+  border: 2px solid var(--black);
+  background-color: var(--white);
+  border-radius: 5px;
   padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+}
+
+.book-card > h3{
+  font-size: 1rem;
+  margin-bottom: .25rem;
+}
+
+.book-card > h6 {
+  color: var(--dark-grey);
+  font-size: .75rem;
+  margin-bottom: 1rem;
+}
+
+.book-card > p {
+  font-family: 'Jura', sans-serif;
+  color: var(--black);
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: .5rem;
+}
+
+.card-buttons {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr min-content;
+}
+
+.card-buttons button {
+  border: none;
+  border-radius: 5px;
+  padding: .2rem;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--black);
+
+}
+
+.remove-button::before{
+  content: url(./img/delete.svg);
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.read{
+  background-color: var(--green);
+}
+
+.not-read {
+  background-color: var(--orange);
+}
+
+.remove-button{
+  background-color: var(--red);
+}
+
+.not-read::before{
+  content: "NOT ";
 }
 
 /* MODAL */
@@ -80,7 +143,7 @@ main button:first-child {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0.5rem 1rem 1rem 1rem;
-  background-color: white;
+  background-color: var(--white);
   border-radius: 5px;
   border: 2px solid var(--black);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, .9);
@@ -139,7 +202,8 @@ legend {
   align-self: center;
 }
 
-button[type="submit"]{
+button[type="submit"],
+#add-book-button {
   background-color: var(--blue);
   padding: 0.5rem 0;
   color: var(--white);
@@ -148,15 +212,4 @@ button[type="submit"]{
   font-size: 1rem;
   font-weight: bolder;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, .5);
-}
-
-/*  */
-button {
-  cursor: pointer;
-}
-
-header {
-  justify-content: center;
-  display: flex;
-  align-items: center;
 }

@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const formModal = document.getElementById("form-modal");
   const addBookForm = document.getElementById("add-book-form");
   const cancelButton = document.getElementById("cancel-button");
-  toggleClass(formModal, ["hidden", "modal"])//TEST
   addBookForm.addEventListener("submit", (e) =>
     bookSubmitHandler(e, addBookForm, booksSection)
   );
@@ -31,6 +30,7 @@ function addDefaultBooks(section) {
     new Book("To Kill a Mockingbird", "Harper Lee", 336, true),
     new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false),
     new Book("The Catcher in the Rye", "J.D. Salinger", 224, true),
+    new Book("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa", 224, true),
   ];
 
   defaultBooks.forEach((book) => {
@@ -90,21 +90,17 @@ function generateBookCard(obj) {
   const bookCard = createBookCardElement("div", "", [
     "book-card",
   ]);
-  const title = createBookCardElement("h3", obj.title, [
+  const title = createBookCardElement("h3", obj.title, []);
+  const author = createBookCardElement("h6", `By ${obj.author}`, []);
+  const pages = createBookCardElement("p", `${obj.pages} pages`, []);
+  const bookCardButtons = createBookCardElement("div", "",["card-buttons",]);
+  const deleteButton = createBookCardElement("button", "", ["remove-button",]);
+  const readButton = createBookCardElement("button", "READ", ["read",]);
 
-  ]);
-  const author = createBookCardElement("h6", `By ${obj.author}`, [
-
-  ]);
-  const pages = createBookCardElement("p", `${obj.pages} pages`, [
-
-  ]);
-  const deleteButton = createBookCardElement("button", "REMOVE", [
-
-  ]);
-  const readButton = createBookCardElement("button", "READ", [
-    "read",
-  ]);
+  const buttons = [readButton, deleteButton]
+  buttons.forEach((button) => {
+    bookCardButtons.appendChild(button)
+  })
 
   deleteButton.addEventListener("click", () => deleteBookCard(bookCard, obj));
   
@@ -117,7 +113,7 @@ function generateBookCard(obj) {
     toggleClass(readButton, ["not-read"]);
   }
 
-  const elements = [title, author, pages, readButton, deleteButton];
+  const elements = [title, author, pages, bookCardButtons];
   elements.forEach((element) => {
     bookCard.appendChild(element);
   });
