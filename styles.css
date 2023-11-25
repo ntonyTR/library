@@ -38,6 +38,18 @@ header{
   letter-spacing: 1ch;
 }
 
+header > h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0;
+  font-weight: lighter;
+}
+
+h3 > a{
+  text-decoration: none;
+  color: var(--blue);
+  font-weight: bold;
+}
+
 .hidden {
   display: none;
 }
@@ -51,6 +63,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0px 2rem;
 }
 
 main > button:first-child {

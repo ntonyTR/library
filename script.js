@@ -24,13 +24,6 @@ function addDefaultBooks(section) {
     new Book("Game of Thrones", "George R.R. Martin", 694, true),
     new Book("The Lord of the Rings", "J.R.R. Tolkien", 1216, false),
     new Book("It", "Stephen King", 1168, true),
-    new Book("1984", "George Orwell", 336, true),
-    new Book("Cien años de soledad", "Gabriel García Márquez ", 464, false),
-    new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 223, true),
-    new Book("To Kill a Mockingbird", "Harper Lee", 336, true),
-    new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false),
-    new Book("The Catcher in the Rye", "J.D. Salinger", 224, true),
-    new Book("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaa", 224, true),
   ];
 
   defaultBooks.forEach((book) => {
@@ -79,11 +72,9 @@ function showBookCard(obj, section) {
 }
 
 function toggleClass(element, classNames =[]) {
-  // element.classList.toggle(className);
   classNames.forEach(className => {
     element.classList.toggle(className)
   });
-
 }
 
 function generateBookCard(obj) {
